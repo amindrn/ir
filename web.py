@@ -9,6 +9,8 @@ from tqdm import tqdm
 def scrapAll():
     page = 2
     scraptedData = []
+    pagesNum = input('number of pages:')
+    fileName = input('csv file name(dont enter .csv):')
     while True:
 
         page_url = f'https://www.tabnak.ir/fa/archive?service_id=-1&sec_id=-1&cat_id=-1&rpp=20&from_date=1384/01/01&to_date=1401/03/24&p={page}'
@@ -30,13 +32,13 @@ def scrapAll():
                 'text': article.text,
                 'title': article.title
             })
-        if page == 150:
+        if page == int(pagesNum) + 1:
             break
         # print(links[2])
 
         # print(len(links))
     df = pd.DataFrame(scraptedData)
-    df.to_csv(f'tabnak150Page.csv')
+    df.to_csv(f'{fileName}.csv')
     # print(scraptedData)
 
 
